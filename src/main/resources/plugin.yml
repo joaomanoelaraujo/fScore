@@ -1,0 +1,4 @@
+name: fScore
+version: '1.0-SNAPSHOT'
+depend: [aCore, nLogin]
+main: me.joaomanoel.d4rkk.dev.fScore.Main

@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+}
+
+group = 'me.joaomanoel.d4rkk.dev'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    maven { url = uri("https://repo.nickuc.com/maven-releases/") }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'}
+
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+
+    maven { url 'https://repo.stellardrift.ca/maven/internal/' }
+
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://repo.codemc.org/repository/nms/' }
+    maven { url 'https://repo.dmulloy2.net/nexus/repository/public/' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
+    compileOnly files('C:/Aether/Sources/Java 11 - 1.11.1/aCore-master/main/target/aCore.jar')
+    compileOnly("com.nickuc.login:api:10.4")
+}
+
+tasks {
+    runServer {
+        minecraftVersion("1.8.8")
+    }
+}
+
+def targetJavaVersion = 8
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
