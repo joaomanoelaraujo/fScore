@@ -31,14 +31,14 @@ public class Language {
                   " §7para logar utilize",
                   " §f/login <senha>",
                   "",
-                  "§6§lREGISTRAR",
-                  "§7para registrar-se utilize",
-                  "§f/registrar <senha> <senha>",
+                  " §6§lREGISTRAR",
+                  " §7para registrar-se utilize",
+                  " §f/registrar <senha> <senha>",
                   "",
-                  "Status: {nlogin_auth}",
-                  "Ping: {ping}",
+                  " Status: {nlogin_auth}",
+                  " Ping: {ping}",
                   "",
-                  "§6www.firemc.com.br");
+                  " §6www.firemc.com.br");
 
   
   public static void setupLanguage() {
